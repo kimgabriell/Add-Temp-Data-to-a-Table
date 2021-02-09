@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Add data to a Table</title>
+</head>
+<body>
+    <form action="" id="formData">
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput">
+        <label for="mobileInput">Mobile No:</label>
+        <input type="number" id="mobileInput">
+        <label for="emailInput">Email:</label>
+        <input type="email" id="emailInput">
+
+        <button type="button" onclick="addData();">Record</button>
+        <button type="button" onclick="resetForm();">Reset</button>
+    </form>
+
+    <table border="1" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!--<td></td>-->
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        function addData(){
+            var name = document.getElementById("nameInput").value;
+            var mobile = document.getElementById("mobileInput").value;
+            var email = document.getElementById("emailInput").value;
+
+            if (name.length > 30){
+                alert("name must only be 30 characters");
+                console.log("exceeded Limit chars");
+            }
+            else{
+                var table = document.getElementsByTagName('table')[0];
+                var newRow = table.insertRow(1);
+
+                var cel1 = newRow.insertCell(0);
+                var cel2 = newRow.insertCell(1);
+                var cel3 = newRow.insertCell(2);
+
+                cel1.innerHTML = name;
+                cel2.innerHTML = mobile;
+                cel3.innerHTML = email;
+            }
+        }
+
+        function resetForm(){
+            document.getElementById("formData").reset();
+        }
+    </script>
+</body>
+</html>
