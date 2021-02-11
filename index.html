@@ -15,7 +15,7 @@
         <label for="emailInput">Email:</label>
         <input type="email" id="emailInput">
 
-        <button type="button" onclick="addData();">Record</button>
+        <button type="button" onclick="verifyData();">Record</button>
         <button type="button" onclick="resetForm();">Reset</button>
     </form>
 
@@ -35,27 +35,56 @@
     </table>
     
     <script>
+        function verifyData(){
+            var name = document.getElementById("nameInput").value;
+            var mobile = document.getElementById("mobileInput").value;
+            var email = document.getElementById("emailInput").value;
+            //email format checker
+            var emailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            
+            if(name == "" || mobile == "" || email == ""){
+                alert("Please fill up all fields");
+                console.log("empty fields");
+                return false;
+            }
+            else if (name.length > 30){
+                alert("Name must only be 30 characters");
+                console.log("exceeded Limit chars");
+                return false;
+            }
+            else if (isNaN(mobile)){
+                alert("Please enter numeric value");
+                console.log("Please enter numeric value");
+                return false;
+            }
+            else if (mobile.length >= 12){
+                alert("Exceeded mobile limit");
+                console.log("exceeded mobile limit");
+                return false;
+            }
+            else if (!email.match(emailformat)){
+                alert("Invalid Email");
+                console.log("email validation does not match");
+                return false;
+            }
+            addData();
+        }
+
         function addData(){
             var name = document.getElementById("nameInput").value;
             var mobile = document.getElementById("mobileInput").value;
             var email = document.getElementById("emailInput").value;
-
-            if (name.length > 30){
-                alert("name must only be 30 characters");
-                console.log("exceeded Limit chars");
-            }
-            else{
-                var table = document.getElementsByTagName('table')[0];
-                var newRow = table.insertRow(1);
-
-                var cel1 = newRow.insertCell(0);
-                var cel2 = newRow.insertCell(1);
-                var cel3 = newRow.insertCell(2);
-
-                cel1.innerHTML = name;
-                cel2.innerHTML = mobile;
-                cel3.innerHTML = email;
-            }
+            
+            var table = document.getElementsByTagName('table')[0];
+            var newRow = table.insertRow(1);
+            
+            var cel1 = newRow.insertCell(0);
+            var cel2 = newRow.insertCell(1)
+            var cel3 = newRow.insertCell(2);
+            
+            cel1.innerHTML = name;
+            cel2.innerHTML = mobile;
+            cel3.innerHTML = email;
         }
 
         function resetForm(){
